@@ -17,18 +17,13 @@ sudo apt-get install -y lxc-docker
 # Install curl and git.
 sudo apt-get install -y curl git
 
-# Install Goat.
-sudo curl -o /usr/local/lib/goat https://s3-ap-northeast-1.amazonaws.com/yosssi/goat/linux_amd64/goat
-sudo chmod 777 /usr/local/lib/goat
-sudo echo "PATH=\$PATH:/usr/local/lib/goat" >> /home/vagrant/.bash_profile
-
 # Install Go 1.2.1.
 sudo curl -o /usr/local/go1.2.1.linux-amd64.tar.gz https://go.googlecode.com/files/go1.2.1.linux-amd64.tar.gz
 sudo tar -C /usr/local -xzf /usr/local/go1.2.1.linux-amd64.tar.gz
 sudo rm /usr/local/go1.2.1.linux-amd64.tar.gz
 sudo echo "export GOROOT=/usr/local/go" >> /home/vagrant/.bash_profile
 sudo echo "export GOPATH=\$HOME/go" >> /home/vagrant/.bash_profile
-sudo echo "PATH=\$PATH:\$GOPATH/bin:\$GOROOT:\$GOROOT/bin" >> /home/vagrant/.bash_profile
+sudo echo "PATH=\$PATH:\$GOROOT:\$GOROOT/bin" >> /home/vagrant/.bash_profile
 
 # Install Java.
 sudo curl -o /usr/local/lib/jre-7u51-linux-x64.tar.gz https://s3-ap-northeast-1.amazonaws.com/yosssi/java/jre-7u51-linux-x64.gz
@@ -62,6 +57,11 @@ sudo /usr/local/lib/node-v0.10.26-linux-x64/bin/npm install -g uglify-js
 
 # Install UglifyCSS.
 sudo /usr/local/lib/node-v0.10.26-linux-x64/bin/npm install -g uglifycss
+
+# Install Goat.
+sudo curl -o /usr/local/lib/goat https://s3-ap-northeast-1.amazonaws.com/yosssi/goat/linux_amd64/goat
+sudo chmod 777 /usr/local/lib/goat
+sudo echo "PATH=\$PATH:/usr/local/lib/goat" >> /home/vagrant/.bash_profile
 
 # Change the owner of /home/vagrant/.bash_profile.
 sudo chown vagrant:vagrant /home/vagrant/.bash_profile
