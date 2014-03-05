@@ -1,0 +1,54 @@
+{
+	"builders": [{
+		"type": "virtualbox-iso",
+		"guest_os_type": "Ubuntu_64",
+		"iso_url": "http://releases.ubuntu.com/saucy/ubuntu-13.10-server-amd64.iso",
+		"iso_checksum": "4d1a8b720cdd14b76ed9410c63a00d0e",
+		"iso_checksum_type": "md5",
+		"ssh_username": "vagrant",
+		"ssh_password": "vagrant",
+		"ssh_wait_timeout": "1800s",
+		"shutdown_command": "echo 'shutdown -P now' > /tmp/shutdown.sh; echo 'vagrant'|sudo -S sh '/tmp/shutdown.sh'",
+		"vboxmanage": [
+			[ "modifyvm", "{{.Name}}", "--memory", "512" ],
+			[ "modifyvm", "{{.Name}}", "--cpus", "1" ]
+		],
+		"boot_wait": "10s",
+		"boot_command": [
+			"<esc><wait>",
+			"<esc><wait>",
+			"<enter><wait>",
+			"/install/vmlinuz<wait>",
+			" auto<wait>",
+			" console-setup/ask_detect=false<wait>",
+			" console-setup/layoutcode=us<wait>",
+			" console-setup/modelcode=pc105<wait>",
+			" debconf/frontend=noninteractive<wait>",
+			" debian-installer=en_US<wait>",
+			" fb=false<wait>",
+			" initrd=/install/initrd.gz<wait>",
+			" kbd-chooser/method=us<wait>",
+			" keyboard-configuration/layout=USA<wait>",
+			" keyboard-configuration/variant=USA<wait>",
+			" locale=en_US<wait>",
+			" netcfg/get_hostname=ubuntu-1310<wait>",
+			" netcfg/get_domain=vagrantup.com<wait>",
+			" noapic<wait>",
+			" preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg<wait>",
+			" -- <wait>",
+			"<enter><wait>"
+		],
+		"http_directory": "http"
+	}],
+	"provisioners": [{
+		"type": "shell",
+		"execute_command": "echo 'vagrant'|sudo -S sh '{{.Path}}'",
+		"scripts": [
+			"scripts/provision.sh"
+		]
+	}],
+	"post-processors": [{
+		"type": "vagrant",
+		"output": "xpress.box"
+	}]
+}
