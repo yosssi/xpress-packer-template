@@ -10,7 +10,7 @@
 		"ssh_wait_timeout": "1800s",
 		"shutdown_command": "echo 'shutdown -P now' > /tmp/shutdown.sh; echo 'vagrant'|sudo -S sh '/tmp/shutdown.sh'",
 		"vboxmanage": [
-			[ "modifyvm", "{{.Name}}", "--memory", "512" ],
+			[ "modifyvm", "{{.Name}}", "--memory", "1024" ],
 			[ "modifyvm", "{{.Name}}", "--cpus", "1" ]
 		],
 		"boot_wait": "10s",
